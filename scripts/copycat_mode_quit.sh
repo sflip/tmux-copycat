@@ -9,15 +9,15 @@ unbind_cancel_bindings() {
 	local key
 	for key in $cancel_mode_bindings; do
 		tmux unbind-key -T copy-mode-vi "$key"
-		tmux unbind-key -T copy-mode "$key"
+		tmux bind-key -T copy-mode-vi "$key" send-keys -X cancel
 	done
 }
 
 unbind_prev_next_bindings() {
 	tmux unbind-key -T copy-mode-vi "$(copycat_next_key)"
-	tmux unbind-key -T copy-mode "$(copycat_next_key)"
+	tmux bind-key -T copy-mode-vi "$(copycat_next_key)" send-keys -X search-again
 	tmux unbind-key -T copy-mode-vi "$(copycat_prev_key)"
-	tmux unbind-key -T copy-mode "$(copycat_prev_key)"
+	tmux bind-key -T copy-mode-vi "$(copycat_prev_key)" send-keys -X search-reverse
 }
 
 unbind_all_bindings() {
