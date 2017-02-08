@@ -8,13 +8,16 @@ unbind_cancel_bindings() {
 	local cancel_mode_bindings=$(copycat_quit_copy_mode_keys)
 	local key
 	for key in $cancel_mode_bindings; do
-		tmux unbind-key -n "$key"
+		tmux unbind-key -T vi-copy-mode "$key"
+		tmux unbind-key -T emacs-copy-mode "$key"
 	done
 }
 
 unbind_prev_next_bindings() {
-	tmux unbind-key -n "$(copycat_next_key)"
-	tmux unbind-key -n "$(copycat_prev_key)"
+	tmux unbind-key -T vi-copy-mode "$(copycat_next_key)"
+	tmux unbind-key -T emacs-copy-mode "$(copycat_next_key)"
+	tmux unbind-key -T vi-copy-mode "$(copycat_prev_key)"
+	tmux unbind-key -T emacs-copy-mode "$(copycat_prev_key)"
 }
 
 unbind_all_bindings() {

@@ -16,7 +16,8 @@ extend_key() {
 	# 3. `true` command ensures an exit status 0 is returned. This ensures a
 	#	 user never gets an error msg - even if the script file from step 2 is
 	#	 deleted.
-	tmux bind-key -n "$key" run-shell "tmux send-keys '$key'; $script; true"
+	tmux bind-key -T vi-copy-mode "$key" run-shell "$script"
+	tmux bind-key -T emacs-copy-mode "$key" run-shell "$script"
 }
 
 copycat_cancel_bindings() {
